@@ -41,26 +41,40 @@
             <?php if (!empty($transactions)) : ?>
                 <?php foreach ($transactions as $transaction) : ?>
                     <tr>
-                        <td><?= $transaction[0] ?></td>
-                        <td><?= $transaction[1] ?></td>
-                        <td><?= $transaction[2] ?></td>
+                        <td><?= $transaction['date'] ?></td>
+                        <td><?= $transaction['checkNumber'] ?></td>
+                        <td><?= $transaction['description'] ?></td>
                         <td>
-                            <?php if ($transaction[3] < 0) : ?>
+                            <?php if ($transaction['amount'] < 0) : ?>
                                 <span style="color: red;">
-                                    <?= $transaction[3] ?>
+                                    <?= $transaction['amount'] ?>
                                 </span>
-                            <?php elseif ($transaction[3] > 0) : ?>
+                            <?php elseif ($transaction['amount'] > 0) : ?>
                                 <span style="color: green;">
-                                    <?= $transaction[3] ?>
+                                    <?= $transaction['amount'] ?>
                                 </span>
                             <?php else : ?>
-                                <?= $transaction[3] ?>
+                                <?= $transaction['amount'] ?>
                             <?php endif ?>
                         </td>
                     </tr>
                 <?php endforeach ?>
             <?php endif ?>
         </tbody>
+        <tfoot>
+            <tr>
+                <th colspan="3">Total Income:</th>
+                <td><?= $totals['totalIncome'] ?? 0 ?></td>
+            </tr>
+            <tr>
+                <th colspan="3">Total Expense:</th>
+                <td><?= $totals['totalExpense'] ?? 0 ?></td>
+            </tr>
+            <tr>
+                <th colspan="3">Net Total:</th>
+                <td><?= $totals['netTotal'] ?? 0 ?></td>
+            </tr>
+        </tfoot>
     </table>
 </body>
 
