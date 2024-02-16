@@ -41,40 +41,26 @@
             <?php if (!empty($transactions)) : ?>
                 <?php foreach ($transactions as $transaction) : ?>
                     <tr>
-                        <td><?= formatDate($transaction['date']) ?></td>
-                        <td><?= $transaction['checkNumber'] ?></td>
-                        <td><?= $transaction['description'] ?></td>
+                        <td><?= $transaction[0] ?></td>
+                        <td><?= $transaction[1] ?></td>
+                        <td><?= $transaction[2] ?></td>
                         <td>
-                            <?php if ($transaction['amount'] < 0) : ?>
+                            <?php if ($transaction[3] < 0) : ?>
                                 <span style="color: red;">
-                                    <?= formatDollarAmount($transaction['amount']) ?>
+                                    <?= $transaction[3] ?>
                                 </span>
-                            <?php elseif ($transaction['amount'] > 0) : ?>
+                            <?php elseif ($transaction[3] > 0) : ?>
                                 <span style="color: green;">
-                                    <?= formatDollarAmount($transaction['amount']) ?>
+                                    <?= $transaction[3] ?>
                                 </span>
                             <?php else : ?>
-                                <?= formatDollarAmount($transaction['amount']) ?>
+                                <?= $transaction[3] ?>
                             <?php endif ?>
                         </td>
                     </tr>
                 <?php endforeach ?>
             <?php endif ?>
         </tbody>
-        <tfoot>
-            <tr>
-                <th colspan="3">Total Income:</th>
-                <td><?= formatDollarAmount($totals['totalIncome'] ?? 0) ?></td>
-            </tr>
-            <tr>
-                <th colspan="3">Total Expense:</th>
-                <td><?= formatDollarAmount($totals['totalExpense'] ?? 0) ?></td>
-            </tr>
-            <tr>
-                <th colspan="3">Net Total:</th>
-                <td><?= formatDollarAmount($totals['netTotal'] ?? 0) ?></td>
-            </tr>
-        </tfoot>
     </table>
 </body>
 
